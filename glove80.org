@@ -1,0 +1,386 @@
+* includes
+
+#+BEGIN_SRC c :noweb yes :tangle config/glove80.c
+#include <behaviors.dtsi>
+/* Include all behaviour includes needed */
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/rgb.h>
+#include "./locale/keys_de.h"
+#+end_src
+
+* layer defines
+
+#+begin_src elisp :results none
+(setq km/active-layers '("base" "lower" "magic"))
+#+end_src
+
+#+NAME: layer-defines
+#+BEGIN_SRC elisp
+(km/gen-layer-defines km/active-layers)
+#+END_SRC
+
+#+BEGIN_SRC c :noweb yes :tangle config/glove80.c
+<<layer-defines()>>
+
+/* To deal with the situation where there is no Lower layer, to keep &lower happy */
+#ifndef LAYER_Lower
+#define LAYER_Lower 0
+#endif
+#+END_SRC
+
+* behaviors
+
+#+BEGIN_SRC c :noweb yes :tangle config/glove80.c
+/ {
+    /* Glove80 system behavior & macros */
+    behaviors {
+        // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
+        // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
+        lower: lower {
+            compatible = "zmk,behavior-tap-dance";
+            label = "LAYER_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo LAYER_Lower>, <&to LAYER_Lower>;
+        };
+    };
+};
+#+end_src
+
+* macros
+
+#+BEGIN_SRC c :noweb yes :tangle config/glove80.c
+/ {
+    macros {
+        rgb_ug_status_macro: rgb_ug_status_macro {
+            label = "RGB_UG_STATUS";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&rgb_ug RGB_STATUS>;
+        };
+
+        bt_0: bt_0 {
+            label = "BT_0";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 0>;
+        };
+
+        bt_1: bt_1 {
+            label = "BT_1";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 1>;
+        };
+
+        bt_2: bt_2 {
+            label = "BT_2";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 2>;
+        };
+
+        bt_3: bt_3 {
+            label = "BT_3";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 3>;
+        };
+    };
+};
+#+end_src
+
+* keymap
+
+** layer base
+*** left hand
+
+#+NAME: base-lnt
+| &kp F1    | &kp F2   | &kp F3  | &kp F4   | &kp F5    |        |
+| &kp EQUAL | &kp N1   | &kp N2  | &kp N3   | &kp N4    | &kp N5 |
+| &kp TAB   | &kp Q    | &kp W   | &kp E    | &kp R     | &kp T  |
+| &kp ESC   | &kp A    | &kp S   | &kp D    | &kp F     | &kp G  |
+| &kp GRAVE | &kp DE_Z | &kp X   | &kp C    | &kp V     | &kp B  |
+| &kp LALT  | &kp HOME | &kp END | &kp LEFT | &kp RIGHT |        |
+
+
+#+NAME: base-lt
+| &kp LSHFT | &kp LCTRL | &lower               |
+| &kp BSPC  | &kp DEL   | &magic LAYER_Magic 0 |
+
+*** right hand
+
+#+NAME: base-rnt
+|          | &kp F6 | &kp F7    | &kp F8   | &kp F9   | &kp F10   |
+| &kp N6   | &kp N7 | &kp N8    | &kp N9   | &kp N0   | &kp MINUS |
+| &kp DE_Y | &kp U  | &kp I     | &kp O    | &kp P    | &kp BSLH  |
+| &kp H    | &kp J  | &kp K     | &kp L    | &kp SEMI | &kp SQT   |
+| &kp N    | &kp M  | &kp COMMA | &kp DOT  | &kp FSLH | &kp PG_UP |
+|          | &kp UP | &kp DOWN  | &kp LBKT | &kp RBKT | &kp PG_DN |
+
+#+NAME: base-rt
+| &kp LGUI | &kp RCTRL | &kp RSHFT |
+| &kp RALT | &kp RET   | &kp SPACE |
+
+** layer lower
+*** left hand
+
+#+NAME: lower-lnt
+| &kp C_BRI_DN         | &kp C_BRI_UP | &kp C_PREV     | &kp C_NEXT     | &kp C_PP        |           |
+| &trans               | &none        | &none          | &none          | &none           | &kp HOME  |
+| &trans               | &none        | &none          | &kp UP_ARROW   | &none           | &kp END   |
+| &trans               | &none        | &kp LEFT_ARROW | &kp DOWN_ARROW | &kp RIGHT_ARROW | &kp PG_UP |
+| &trans               | &kp K_APP    | &none          | &kp F11        | &kp F12         | &kp PG_DN |
+| &magic LAYER_Magic 0 | &kp CAPS     | &kp INS        | &kp F11        | &kp F12         |           |
+
+#+NAME: lower-lt
+| &trans | &trans | &to 0  |
+| &trans | &trans | &trans |
+
+*** right hand
+
+#+NAME: lower-rnt
+|                       | &kp C_MUTE | &kp C_VOL_DN | &kp C_VOL_UP | &none           | &kp PAUSE_BREAK |
+| &kp LEFT_PARENTHESIS  | &kp KP_NUM | &kp KP_EQUAL | &kp KP_SLASH | &kp KP_MULTIPLY | &kp PRINTSCREEN |
+| &kp RIGHT_PARENTHESIS | &kp KP_N7  | &kp KP_N8    | &kp KP_N9    | &kp KP_MINUS    | &kp SCROLLLOCK  |
+| &kp PERCENT           | &kp KP_N4  | &kp KP_N5    | &kp KP_N6    | &kp KP_PLUS     | &none           |
+| &kp COMMA             | &kp KP_N1  | &kp KP_N2    | &kp KP_N3    | &kp KP_ENTER    | &trans          |
+|                       | &kp KP_N0  | &kp KP_N0    | &kp KP_DOT   | &kp KP_ENTER    | &trans          |
+
+#+NAME: lower-rt
+| &trans | &trans | &trans |
+| &trans | &trans | &trans |
+
+
+** layer magic
+*** left hand
+
+#+NAME: magic-lnt
+| &bt BT_CLR  | &none           | &none           | &none           | &none           |                 |
+| &none       | &none           | &none           | &none           | &none           | &none           |
+| &none       | &rgb_ug RGB_SPI | &rgb_ug RGB_SAI | &rgb_ug RGB_HUI | &rgb_ug RGB_BRI | &rgb_ug RGB_TOG |
+| &bootloader | &rgb_ug RGB_SPD | &rgb_ug RGB_SAD | &rgb_ug RGB_HUD | &rgb_ug RGB_BRD | &rgb_ug RGB_EFF |
+| &sys_reset  | &none           | &none           | &none           | &none           | &none           |
+| &none       | &none           | &none           | &none           | &none           |                 |
+
+#+NAME: magic-lt
+| &bt_2     | &bt_3     | &out OUT_USB         |
+| &bt_0     | &bt_1     | &none                |
+
+*** right hand
+
+#+NAME: magic-rnt
+|       | &none | &none | &none | &none | &bt BT_CLR_ALL |
+| &none | &none | &none | &none | &none | &none          |
+| &none | &none | &none | &none | &none | &none          |
+| &none | &none | &none | &none | &none | &bootloader    |
+| &none | &none | &none | &none | &none | &sys_reset     |
+|       | &none | &none | &none | &none | &none          |
+
+#+NAME: magic-rt
+| &none    | &none     | &none     |
+| &none    | &none     | &none     |
+
+
+* generation
+
+This part is to generate keymap according to the org tables defined above and some misc code for glove80, nothing real configuration here
+
+#+NAME: keymap
+#+BEGIN_SRC elisp
+(km/gen-keymap km/active-layers)
+#+END_SRC
+
+#+BEGIN_SRC text :noweb yes :tangle config/glove80.c
+/ {
+    magic: magic {
+        compatible = "zmk,behavior-hold-tap";
+        label = "MAGIC_HOLD_TAP";
+        #binding-cells = <2>;
+        flavor = "tap-preferred";
+        tapping-term-ms = <200>;
+        bindings = <&mo>, <&rgb_ug_status_macro>;
+    };
+};
+
+    /* #define for key positions */
+#define POS_LH_T1 52
+#define POS_LH_T2 53
+#define POS_LH_T3 54
+#define POS_LH_T4 69
+#define POS_LH_T5 70
+#define POS_LH_T6 71
+#define POS_LH_C1R2 15
+#define POS_LH_C1R3 27
+#define POS_LH_C1R4 39
+#define POS_LH_C1R5 51
+#define POS_LH_C2R1 4
+#define POS_LH_C2R2 14
+#define POS_LH_C2R3 26
+#define POS_LH_C2R4 38
+#define POS_LH_C2R5 50
+#define POS_LH_C2R6 68
+#define POS_LH_C3R1 3
+#define POS_LH_C3R2 13
+#define POS_LH_C3R3 25
+#define POS_LH_C3R4 37
+#define POS_LH_C3R5 49
+#define POS_LH_C3R6 67
+#define POS_LH_C4R1 2
+#define POS_LH_C4R2 12
+#define POS_LH_C4R3 24
+#define POS_LH_C4R4 36
+#define POS_LH_C4R5 48
+#define POS_LH_C4R6 66
+#define POS_LH_C5R1 1
+#define POS_LH_C5R2 11
+#define POS_LH_C5R3 23
+#define POS_LH_C5R4 35
+#define POS_LH_C5R5 47
+#define POS_LH_C5R6 65
+#define POS_LH_C6R1 0
+#define POS_LH_C6R2 10
+#define POS_LH_C6R3 22
+#define POS_LH_C6R4 34
+#define POS_LH_C6R5 46
+#define POS_LH_C6R6 64
+#define POS_RH_T1 57
+#define POS_RH_T2 56
+#define POS_RH_T3 55
+#define POS_RH_T4 74
+#define POS_RH_T5 73
+#define POS_RH_T6 72
+#define POS_RH_C1R2 16
+#define POS_RH_C1R3 28
+#define POS_RH_C1R4 40
+#define POS_RH_C1R5 58
+#define POS_RH_C2R1 5
+#define POS_RH_C2R2 17
+#define POS_RH_C2R3 29
+#define POS_RH_C2R4 41
+#define POS_RH_C2R5 59
+#define POS_RH_C2R6 75
+#define POS_RH_C3R1 6
+#define POS_RH_C3R2 18
+#define POS_RH_C3R3 30
+#define POS_RH_C3R4 42
+#define POS_RH_C3R5 60
+#define POS_RH_C3R6 76
+#define POS_RH_C4R1 7
+#define POS_RH_C4R2 19
+#define POS_RH_C4R3 31
+#define POS_RH_C4R4 43
+#define POS_RH_C4R5 61
+#define POS_RH_C4R6 77
+#define POS_RH_C5R1 8
+#define POS_RH_C5R2 20
+#define POS_RH_C5R3 32
+#define POS_RH_C5R4 44
+#define POS_RH_C5R5 62
+#define POS_RH_C5R6 78
+#define POS_RH_C6R1 9
+#define POS_RH_C6R2 21
+#define POS_RH_C6R3 33
+#define POS_RH_C6R4 45
+#define POS_RH_C6R5 63
+#define POS_RH_C6R6 79
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+        <<keymap()>>
+    };
+};
+#+END_SRC
+
+* code generator
+
+#+NAME: layer
+#+header: :var name="" left-no-thumbs=1 left-thumbs=1 right-no-thumbs=1 right-thumbs=1 
+#+BEGIN_SRC emacs-lisp :results none
+(defun km/join (a b) "join two lists" (cl-mapcar 'append a b))
+(defun km/with-thumbs (is-left no-thumbs thumbs)
+  "get one hand keymap"
+  (let ((normal-rows (butlast no-thumbs 2))
+        (thumb-rows (if is-left
+                         (km/join (last no-thumbs 2) thumbs)    
+                       (km/join thumbs (last no-thumbs 2))
+                       ))
+        )
+    (append normal-rows thumb-rows)
+    ))
+
+(defun km/gen-layer-name (base-name)
+  "generate layer name"
+  (format "LAYER_%s" (capitalize base-name)))
+
+(defun km/gen-layer-defines (layer-names)
+  "generate layer defines"
+  (require 'dash)
+  (-as->
+   layer-names v
+   (-map-indexed (lambda (idx name)  (format "#define %s %s" (km/gen-layer-name name) idx)) v)
+   (mapconcat 'identity v "\n")
+   )
+  )
+
+(defun km/gen-layer (name left-no-thumbs left-thumbs right-no-thumbs right-thumbs)
+  "generate c code"
+  (let* ((left (km/with-thumbs t left-no-thumbs left-thumbs))
+         (right (km/with-thumbs nil right-no-thumbs right-thumbs))
+         (merged (km/join left right))
+         )
+    (format
+     "%s {\nbindings = <\n%s\n>;\n};\n"
+     (km/gen-layer-name name)
+     (mapconcat (lambda (row) (mapconcat 'identity row "   ")) merged "\n")    )
+    )
+  )
+
+(defun km/table-name ()
+  (plist-get (cadr (org-element-at-point)) :name))
+
+(defun km/table-to-lisp ()
+  (list (cons (km/table-name) (list (org-table-to-lisp)))))
+
+(defun km/all-tables-to-lisp ()
+  (let ((all-tables nil))
+    (org-table-map-tables
+     (lambda () (setq all-tables (append all-tables (km/table-to-lisp)))))
+    all-tables))
+
+(defun km/get-tbl (tables name)
+  "get org table as list by table name"
+  (cadr (assoc name tables))  
+  )
+
+(defun km/gen-layer-by-name (tables name)
+  "generate layer code by layer name"
+  (km/gen-layer
+   name
+   (km/get-tbl tables (format "%s-lnt" name))
+   (km/get-tbl tables (format "%s-lt" name))
+   (km/get-tbl tables (format "%s-rnt" name))
+   (km/get-tbl tables (format "%s-rt" name))
+   )
+  )
+
+(defun km/gen-keymap (layer-names)
+  "generate layer code by layer name"
+  (let ((tables (km/all-tables-to-lisp)))
+    (mapconcat (lambda (layer-name) (km/gen-layer-by-name tables layer-name)) layer-names "\n") 
+    )  
+  )
+#+END_SRC
+
