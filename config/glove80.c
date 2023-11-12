@@ -35,12 +35,12 @@
 
 / {
     macros {
-        rptu_mail: rptu_mail {
-            label = "RPTU_MAIL";
+        copy_all: copy_all {
+            label = "COPY_ALL";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_tap &kp Z &kp M &kp K>;
+                = <&macro_tap &kp LC(A) &kp LC(C)>;
         };
 
         rgb_ug_status_macro: rgb_ug_status_macro {
@@ -205,8 +205,8 @@
         &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &kp TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_EXCLAMATION
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
-        &kp DE_LBKT   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp LG(N4)   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LA(SPC)   &kp DE_STAR
-        &kp DE_LBRC   &kp LC(C)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &magic LAYER_Magic 0   &kp LGUI   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &kp LC(V)   &kp DE_PLUS
+        &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp LG(N4)   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp DE_STAR
+        &kp LC(A)   &kp LC(C)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &magic LAYER_Magic 0   &kp LGUI   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &kp LC(V)   &kp DE_PLUS
         >;
         };
         
