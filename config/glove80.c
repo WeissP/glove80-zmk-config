@@ -154,7 +154,7 @@
 };
 
 &sl {
-    release-after-ms = <30000>;
+    release-after-ms = <5000>;
 };
 
 / {
@@ -299,12 +299,12 @@
         
         LAYER_Sticky {
         bindings = <
-        &none   &none   &none   &none   &none         &none   &none   &none   &none   &none
-        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
-        &none   &none   &none   &none   &rptu_mail   &none   &none   &none   &none   &none   &none   &none
-        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
-        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
-        &none   &none   &none   &none   &none      &none   &none   &none   &none   &none   &none      &none   &none   &none   &none   &none
+        &trans   &trans   &trans   &trans   &trans         &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &webde_mail   &trans   &rptu_mail   &trans   &trans   &trans   &trans   &trans   &personal_tk   &trans
+        &trans   &trans   &trans   &trans   &trans   &gmail   &trans   &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &rptu_cs_mail   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &wangyi_mail   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans
         >;
         };
         
