@@ -13,7 +13,7 @@
 * layer defines
 
 #+begin_src elisp :results none
-(setq km/active-layers '("base" "shift" "lower" "shlower" "macro" "magic"))
+(setq km/active-layers '("base" "shift" "lower" "shlower" "sticky" "magic"))
 #+end_src
 
 #+NAME: layer-defines
@@ -141,8 +141,8 @@
 | &kp DE_LBRC     | &kp LC(C)         | &kp LEFT     | &kp RIGHT | &kp F17      |             |
 
 #+NAME: base-lt
-| &lt LAYER_Lower ENTER | &kp LCTRL | &sl LAYER_Macro      |
-| &lt LAYER_Shift END   | &kp BSPC  | &magic LAYER_Magic 0 |
+| &lt LAYER_Lower ENTER | &sl LAYER_Sticky | &kp LSHIFT           |
+| &lt LAYER_Shift END   | &kp BSPC        | &magic LAYER_Magic 0 |
 
 *** right hand
 
@@ -253,11 +253,11 @@ Shift + Lower layer (accomplished by conditional layer)
 
 
 
-** layer macro
+** layer sticky
 
 *** left hand
 
-#+NAME: macro-lnt
+#+NAME: sticky-lnt
 | &none | &none | &none | &none | &none      |       |
 | &none | &none | &none | &none | &none      | &none |
 | &none | &none | &none | &none | &rptu_mail | &none |
@@ -265,13 +265,13 @@ Shift + Lower layer (accomplished by conditional layer)
 | &none | &none | &none | &none | &none      | &none |
 | &none | &none | &none | &none | &none      |       |
 
-#+NAME: macro-lt
+#+NAME: sticky-lt
 | &none | &none | &none |
 | &none | &none | &none |
 
 *** right hand
 
-#+NAME: macro-rnt
+#+NAME: sticky-rnt
 |       | &none | &none | &none | &none | &none |
 | &none | &none | &none | &none | &none | &none |
 | &none | &none | &none | &none | &none | &none |
@@ -279,7 +279,7 @@ Shift + Lower layer (accomplished by conditional layer)
 | &none | &none | &none | &none | &none | &none |
 |       | &none | &none | &none | &none | &none |
 
-#+NAME: macro-rt
+#+NAME: sticky-rt
 | &none | &none | &none |
 | &none | &none | &none |
 
