@@ -321,3 +321,14 @@
         
     };
 };
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+        combo_ctrlg {
+            timeout-ms = <50>;
+            key-positions = <POS_RH_C2R4 POS_RH_C3R4>;
+            bindings = <&kp LC(G)>;
+        };
+    };
+};
