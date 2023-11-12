@@ -256,7 +256,7 @@
         LAYER_Base {
         bindings = <
         &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp LG(N3)   &kp DE_LBRC   &kp DE_LBKT
-        &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &kp TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
+        &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &mt LALT TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_EXCLAMATION
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
         &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp DE_STAR
@@ -266,12 +266,12 @@
         
         LAYER_Shift {
         bindings = <
-        &kp F1   &kp DE_DLLR   &kp F3   &kp F4   &kp F12         &kp F6   &kp F7   &kp F8   &kp DE_RBRC   &kp DE_RBKT
-        &kp EQUAL   &kp N1   &kp DE_COLON   &kp N3   &kp N4   &kp N5   &kp DE_PIPE   &kp N7   &kp N8   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
-        &kp TAB   &kp LS(Q)   &kp LS(W)   &kp LS(E)   &kp LS(R)   &kp LS(T)   &kp LS(DE_Y)   &kp LS(U)   &kp LS(I)   &kp LS(O)   &kp LS(P)   &kp DE_QMARK
-        &kp ESC   &kp LS(A)   &kp LS(S)   &kp LS(D)   &kp LS(F)   &kp LS(G)   &kp LS(H)   &kp LS(J)   &kp LS(K)   &kp LS(L)   &kp SEMI   &kp DE_TILDE
-        &kp DE_RBKT   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &kp LCTRL   &lower   &kp LGUI   &kp RCTRL   &kp RSHFT   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
-        &kp DE_RBRC   &kp HOME   &kp END   &kp LEFT   &kp RIGHT      &kp BSPC   &kp DEL   &magic LAYER_Magic 0   &kp RALT   &kp RET   &kp SPACE      &kp UP   &kp DOWN   &kp LBKT   &kp RBKT   &kp PG_DN
+        &trans   &kp DE_DLLR   &trans   &trans   &trans         &trans   &trans   &trans   &kp DE_RBRC   &kp DE_RBKT
+        &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_PIPE   &trans   &kp DE_AT   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
+        &trans   &kp LS(Q)   &kp LS(W)   &kp LS(E)   &kp LS(R)   &kp LS(T)   &kp LS(DE_Y)   &kp LS(U)   &kp LS(I)   &kp LS(O)   &kp LS(P)   &kp DE_QMARK
+        &trans   &kp LS(A)   &kp LS(S)   &kp LS(D)   &kp LS(F)   &kp LS(G)   &kp LS(H)   &kp LS(J)   &kp LS(K)   &kp LS(L)   &kp SEMI   &kp DE_TILDE
+        &trans   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &trans   &trans   &trans   &trans   &trans   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
+        &trans   &kp LG(LEFT)   &kp LG(RIGHT)   &kp LEFT   &kp RIGHT      &trans   &trans   &trans   &trans   &trans   &trans      &kp LG(UP)   &kp LG(DOWN)   &kp LBKT   &kp RBKT   &kp PG_DN
         >;
         };
         
