@@ -13,7 +13,7 @@
 * layer defines
 
 #+begin_src elisp :results none
-(setq km/active-layers '("base" "lower" "magic"))
+(setq km/active-layers '("base" "shift" "lower" "shlower" "macro" "magic"))
 #+end_src
 
 #+NAME: layer-defines
@@ -54,6 +54,14 @@
 #+BEGIN_SRC c :noweb yes :tangle config/glove80.c
 / {
     macros {
+        rptu_mail: rptu_mail {
+            label = "RPTU_MAIL";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp Z &kp M &kp K>;
+        };
+
         rgb_ug_status_macro: rgb_ug_status_macro {
             label = "RGB_UG_STATUS";
             compatible = "zmk,behavior-macro";
@@ -101,35 +109,83 @@
 };
 #+end_src
 
+* configs
+
+#+BEGIN_SRC c :noweb yes :tangle config/glove80.c
+/ {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <LAYER_Shift LAYER_Lower>;
+            then-layer = <LAYER_Shlower>;
+        };
+    };
+};
+
+&sl {
+    release-after-ms = <50000>;
+};
+#+END_SRC
+
 * keymap
 
 ** layer base
 *** left hand
 
 #+NAME: base-lnt
-| &kp F1    | &kp F2   | &kp F3  | &kp F4   | &kp F5    |        |
-| &kp EQUAL | &kp N1   | &kp N2  | &kp N3   | &kp N4    | &kp N5 |
-| &kp TAB   | &kp Q    | &kp W   | &kp E    | &kp R     | &kp T  |
-| &kp ESC   | &kp A    | &kp S   | &kp D    | &kp F     | &kp G  |
-| &kp GRAVE | &kp DE_Z | &kp X   | &kp C    | &kp V     | &kp B  |
-| &kp LALT  | &kp HOME | &kp END | &kp LEFT | &kp RIGHT |        |
-
+| &kp F5          | &kp DE_CARET      | &kp F15      | &kp F16   | &kp F11      |             |
+| &kp DE_HASH     | &kp DE_UNDERSCORE | &kp DE_COLON | &kp TAB   | &kp DE_SLASH | &kp DE_SEMI |
+| &kp LC(TAB)     | &kp Q             | &kp W        | &kp E     | &kp R        | &kp T       |
+| &kp LS(LC(TAB)) | &kp A             | &kp S        | &kp D     | &kp F        | &kp G       |
+| &kp DE_LBKT     | &kp DE_Z          | &kp X        | &kp C     | &kp V        | &kp B       |
+| &kp DE_LBRC     | &kp LC(C)         | &kp LEFT     | &kp RIGHT | &kp F17      |             |
 
 #+NAME: base-lt
-| &kp LSHFT | &kp LCTRL | &lower               |
-| &kp BSPC  | &kp DEL   | &magic LAYER_Magic 0 |
+| &lt LAYER_Lower ENTER | &kp LCTRL | &sl LAYER_Macro      |
+| &lt LAYER_Shift END   | &kp BSPC  | &magic LAYER_Magic 0 |
 
 *** right hand
 
 #+NAME: base-rnt
-|          | &kp F6 | &kp F7    | &kp F8   | &kp F9   | &kp F10   |
-| &kp N6   | &kp N7 | &kp N8    | &kp N9   | &kp N0   | &kp MINUS |
-| &kp DE_Y | &kp U  | &kp I     | &kp O    | &kp P    | &kp BSLH  |
-| &kp H    | &kp J  | &kp K     | &kp L    | &kp SEMI | &kp SQT   |
-| &kp N    | &kp M  | &kp COMMA | &kp DOT  | &kp FSLH | &kp PG_UP |
-|          | &kp UP | &kp DOWN  | &kp LBKT | &kp RBKT | &kp PG_DN |
+|             | &kp LG(N1)  | &kp LG(N2)   | &kp LG(N3)           | &kp DE_LBRC             | &kp DE_LBKT        |
+| &kp DE_AMPS | &kp DE_BSLH | &kp DE_MINUS | &kp DE_DOUBLE_QUOTES | &kp DE_LEFT_PARENTHESIS | &kp DE_LT          |
+| &kp DE_Y    | &kp U       | &kp I        | &kp O                | &kp P                   | &kp DE_EXCLAMATION   |
+| &kp H       | &kp J       | &kp K        | &kp L                | &kp DE_EQUAL            | &kp DE_GRAVE       |
+| &kp N       | &kp M       | &kp COMMA    | &kp DOT              | &kp LA(SPC)             | &kp DE_STAR        |
+|             | &kp F6      | &kp DOWN     | &kp UP               | &kp LC(V)               | &kp DE_PLUS        |
 
 #+NAME: base-rt
+| &kp LG(N4) | &mt LALT HOME | &kp SPACE     |
+| &kp LGUI   | &kp DEL       | &mt LCTRL ESC |
+
+** layer shift
+
+
+*** left hand
+
+#+NAME: shift-lnt
+| &kp F1      | &kp DE_DLLR  | &kp F3       | &kp F4    | &kp F12   |           |
+| &kp EQUAL   | &kp N1       | &kp DE_COLON | &kp N3    | &kp N4    | &kp N5    |
+| &kp TAB     | &kp LS(Q)    | &kp LS(W)    | &kp LS(E) | &kp LS(R) | &kp LS(T) |
+| &kp ESC     | &kp LS(A)    | &kp LS(S)    | &kp LS(D) | &kp LS(F) | &kp LS(G) |
+| &kp DE_RBKT | &kp LS(DE_Z) | &kp LS(X)    | &kp LS(C) | &kp LS(V) | &kp LS(B) |
+| &kp DE_RBRC | &kp HOME     | &kp END      | &kp LEFT  | &kp RIGHT |           |
+
+#+NAME: shift-lt
+| &trans | &kp LCTRL | &lower               |
+| &kp BSPC  | &kp DEL   | &magic LAYER_Magic 0 |
+
+*** right hand
+
+#+NAME: shift-rnt
+|              | &kp F6    | &kp F7    | &kp F8              | &kp DE_RBRC              | &kp DE_RBKT  |
+| &kp DE_PIPE  | &kp N7    | &kp N8    | &kp DE_SINGLE_QUOTE | &kp DE_RIGHT_PARENTHESIS | &kp DE_GT    |
+| &kp LS(DE_Y) | &kp LS(U) | &kp LS(I) | &kp LS(O)           | &kp LS(P)                | &kp DE_QMARK |
+| &kp LS(H)    | &kp LS(J) | &kp LS(K) | &kp LS(L)           | &kp SEMI                 | &kp DE_TILDE |
+| &kp LS(N)    | &kp LS(M) | &kp COMMA | &kp DOT             | &kp FSLH                 | &kp PG_UP    |
+|              | &kp UP    | &kp DOWN  | &kp LBKT            | &kp RBKT                 | &kp PG_DN    |
+
+#+NAME: shift-rt
 | &kp LGUI | &kp RCTRL | &kp RSHFT |
 | &kp RALT | &kp RET   | &kp SPACE |
 
@@ -137,12 +193,12 @@
 *** left hand
 
 #+NAME: lower-lnt
-| &kp C_BRI_DN         | &kp C_BRI_UP | &kp C_PREV     | &kp C_NEXT     | &kp C_PP        |           |
-| &trans               | &none        | &none          | &none          | &none           | &kp HOME  |
-| &trans               | &none        | &none          | &kp UP_ARROW   | &none           | &kp END   |
-| &trans               | &none        | &kp LEFT_ARROW | &kp DOWN_ARROW | &kp RIGHT_ARROW | &kp PG_UP |
-| &trans               | &kp K_APP    | &none          | &kp F11        | &kp F12         | &kp PG_DN |
-| &magic LAYER_Magic 0 | &kp CAPS     | &kp INS        | &kp F11        | &kp F12         |           |
+| &trans | &trans          | &trans        | &trans          | &trans          |        |
+| &trans | &trans          | &trans        | &trans          | &trans          | &trans |
+| &trans | &trans          | &trans        | &trans          | &trans          | &trans |
+| &trans | &kp DE_A_UMLAUT | &kp DE_ESZETT | &kp DE_O_UMLAUT | &kp DE_U_UMLAUT | &trans |
+| &trans | &trans          | &trans        | &trans          | &trans          | &trans |
+| &trans | &trans          | &kp PG_UP     | &kp PG_DN       | &trans          |        |
 
 #+NAME: lower-lt
 | &trans | &trans | &to 0  |
@@ -151,23 +207,89 @@
 *** right hand
 
 #+NAME: lower-rnt
-|                       | &kp C_MUTE | &kp C_VOL_DN | &kp C_VOL_UP | &none           | &kp PAUSE_BREAK |
-| &kp LEFT_PARENTHESIS  | &kp KP_NUM | &kp KP_EQUAL | &kp KP_SLASH | &kp KP_MULTIPLY | &kp PRINTSCREEN |
-| &kp RIGHT_PARENTHESIS | &kp KP_N7  | &kp KP_N8    | &kp KP_N9    | &kp KP_MINUS    | &kp SCROLLLOCK  |
-| &kp PERCENT           | &kp KP_N4  | &kp KP_N5    | &kp KP_N6    | &kp KP_PLUS     | &none           |
-| &kp COMMA             | &kp KP_N1  | &kp KP_N2    | &kp KP_N3    | &kp KP_ENTER    | &trans          |
-|                       | &kp KP_N0  | &kp KP_N0    | &kp KP_DOT   | &kp KP_ENTER    | &trans          |
+|                | &trans     | &trans       | &trans      | &trans          | &trans |
+| &kp INT_YEN    | &kp KP_NUM | &kp KP_EQUAL | &kp INT_YEN | &kp DE_EURO     | &trans |
+| &kp DE_DEGREE  | &kp KP_N7  | &kp KP_N8    | &kp KP_N9   | &kp KP_PLUS     | &trans |
+| &kp DE_PERCENT | &kp KP_N4  | &kp KP_N5    | &kp KP_N6   | &kp KP_MINUS    | &trans |
+| &kp DE_COMMA   | &kp KP_N1  | &kp KP_N2    | &kp KP_N3   | &kp KP_MULTIPLY | &trans |
+|                | &kp BSPC   | &kp KP_N0    | &kp DE_DOT  | &kp KP_SLASH    | &trans |
 
 #+NAME: lower-rt
 | &trans | &trans | &trans |
 | &trans | &trans | &trans |
 
 
+** layer shlower
+
+Shift + Lower layer (accomplished by conditional layer) 
+
+*** left hand
+
+#+NAME: shlower-lnt
+| &trans | &trans              | &trans                | &trans              | &trans              |        |
+| &trans | &trans              | &trans                | &trans              | &trans              | &trans |
+| &trans | &trans              | &trans                | &trans              | &trans              | &trans |
+| &trans | &kp LS(DE_A_UMLAUT) | &kp DE_CAPITAL_ESZETT | &kp LS(DE_O_UMLAUT) | &kp LS(DE_U_UMLAUT) | &trans |
+| &trans | &trans              | &trans                | &trans              | &trans              | &trans |
+| &trans | &trans              | &trans                | &trans              | &trans              |        |
+
+#+NAME: shlower-lt
+| &trans | &trans | &trans |
+| &trans | &trans | &trans |
+
+*** right hand
+
+#+NAME: shlower-rnt
+|        | &trans  | &trans  | &trans  | &trans | &trans |
+| &trans | &kp F10 | &kp F11 | &kp F12 | &trans | &trans |
+| &trans | &kp F7  | &kp F8  | &kp F9  | &trans | &trans |
+| &trans | &kp F4  | &kp F5  | &kp F6  | &trans | &trans |
+| &trans | &kp F1  | &kp F2  | &kp F3  | &trans | &trans |
+|        | &trans  | &trans  | &trans  | &trans | &trans |
+
+#+NAME: shlower-rt
+| &trans | &trans | &trans |
+| &trans | &trans | &trans |
+
+
+
+** layer macro
+
+*** left hand
+
+#+NAME: macro-lnt
+| &none | &none | &none | &none | &none      |       |
+| &none | &none | &none | &none | &none      | &none |
+| &none | &none | &none | &none | &rptu_mail | &none |
+| &none | &none | &none | &none | &none      | &none |
+| &none | &none | &none | &none | &none      | &none |
+| &none | &none | &none | &none | &none      |       |
+
+#+NAME: macro-lt
+| &none | &none | &none |
+| &none | &none | &none |
+
+*** right hand
+
+#+NAME: macro-rnt
+|       | &none | &none | &none | &none | &none |
+| &none | &none | &none | &none | &none | &none |
+| &none | &none | &none | &none | &none | &none |
+| &none | &none | &none | &none | &none | &none |
+| &none | &none | &none | &none | &none | &none |
+|       | &none | &none | &none | &none | &none |
+
+#+NAME: macro-rt
+| &none | &none | &none |
+| &none | &none | &none |
+
+
+
 ** layer magic
 *** left hand
 
 #+NAME: magic-lnt
-| &bt BT_CLR  | &none           | &none           | &none           | &none           |                 |
+| &bt BT_CLR  | &none           | &kp CAPSLOCK    | &kp KP_NUMLOCK  | &kp SCROLLLOCK  |                 |
 | &none       | &none           | &none           | &none           | &none           | &none           |
 | &none       | &rgb_ug RGB_SPI | &rgb_ug RGB_SAI | &rgb_ug RGB_HUI | &rgb_ug RGB_BRI | &rgb_ug RGB_TOG |
 | &bootloader | &rgb_ug RGB_SPD | &rgb_ug RGB_SAD | &rgb_ug RGB_HUD | &rgb_ug RGB_BRD | &rgb_ug RGB_EFF |

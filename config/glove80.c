@@ -7,8 +7,11 @@
 #include "./locale/keys_de.h"
 
 #define LAYER_Base 0
-#define LAYER_Lower 1
-#define LAYER_Magic 2
+#define LAYER_Shift 1
+#define LAYER_Lower 2
+#define LAYER_Shlower 3
+#define LAYER_Macro 4
+#define LAYER_Magic 5
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -32,6 +35,14 @@
 
 / {
     macros {
+        rptu_mail: rptu_mail {
+            label = "RPTU_MAIL";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp Z &kp M &kp K>;
+        };
+
         rgb_ug_status_macro: rgb_ug_status_macro {
             label = "RGB_UG_STATUS";
             compatible = "zmk,behavior-macro";
@@ -76,6 +87,20 @@
                   <&bt BT_SEL 3>;
         };
     };
+};
+
+/ {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <LAYER_Shift LAYER_Lower>;
+            then-layer = <LAYER_Shlower>;
+        };
+    };
+};
+
+&sl {
+    release-after-ms = <50000>;
 };
 
 / {
@@ -176,29 +201,62 @@
         compatible = "zmk,keymap";
         LAYER_Base {
         bindings = <
-        &kp F1   &kp F2   &kp F3   &kp F4   &kp F5         &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
-        &kp EQUAL   &kp N1   &kp N2   &kp N3   &kp N4   &kp N5   &kp N6   &kp N7   &kp N8   &kp N9   &kp N0   &kp MINUS
-        &kp TAB   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp BSLH
-        &kp ESC   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SEMI   &kp SQT
-        &kp GRAVE   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &kp LSHFT   &kp LCTRL   &lower   &kp LGUI   &kp RCTRL   &kp RSHFT   &kp N   &kp M   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
-        &kp LALT   &kp HOME   &kp END   &kp LEFT   &kp RIGHT      &kp BSPC   &kp DEL   &magic LAYER_Magic 0   &kp RALT   &kp RET   &kp SPACE      &kp UP   &kp DOWN   &kp LBKT   &kp RBKT   &kp PG_DN
+        &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp LG(N3)   &kp DE_LBRC   &kp DE_LBKT
+        &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &kp TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
+        &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_EXCLAMATION
+        &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
+        &kp DE_LBKT   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &kp LCTRL   &sl LAYER_Macro   &kp LG(N4)   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LA(SPC)   &kp DE_STAR
+        &kp DE_LBRC   &kp LC(C)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &magic LAYER_Magic 0   &kp LGUI   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &kp LC(V)   &kp DE_PLUS
+        >;
+        };
+        
+        LAYER_Shift {
+        bindings = <
+        &kp F1   &kp DE_DLLR   &kp F3   &kp F4   &kp F12         &kp F6   &kp F7   &kp F8   &kp DE_RBRC   &kp DE_RBKT
+        &kp EQUAL   &kp N1   &kp DE_COLON   &kp N3   &kp N4   &kp N5   &kp DE_PIPE   &kp N7   &kp N8   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
+        &kp TAB   &kp LS(Q)   &kp LS(W)   &kp LS(E)   &kp LS(R)   &kp LS(T)   &kp LS(DE_Y)   &kp LS(U)   &kp LS(I)   &kp LS(O)   &kp LS(P)   &kp DE_QMARK
+        &kp ESC   &kp LS(A)   &kp LS(S)   &kp LS(D)   &kp LS(F)   &kp LS(G)   &kp LS(H)   &kp LS(J)   &kp LS(K)   &kp LS(L)   &kp SEMI   &kp DE_TILDE
+        &kp DE_RBKT   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &kp LCTRL   &lower   &kp LGUI   &kp RCTRL   &kp RSHFT   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
+        &kp DE_RBRC   &kp HOME   &kp END   &kp LEFT   &kp RIGHT      &kp BSPC   &kp DEL   &magic LAYER_Magic 0   &kp RALT   &kp RET   &kp SPACE      &kp UP   &kp DOWN   &kp LBKT   &kp RBKT   &kp PG_DN
         >;
         };
         
         LAYER_Lower {
         bindings = <
-        &kp C_BRI_DN   &kp C_BRI_UP   &kp C_PREV   &kp C_NEXT   &kp C_PP         &kp C_MUTE   &kp C_VOL_DN   &kp C_VOL_UP   &none   &kp PAUSE_BREAK
-        &trans   &none   &none   &none   &none   &kp HOME   &kp LEFT_PARENTHESIS   &kp KP_NUM   &kp KP_EQUAL   &kp KP_SLASH   &kp KP_MULTIPLY   &kp PRINTSCREEN
-        &trans   &none   &none   &kp UP_ARROW   &none   &kp END   &kp RIGHT_PARENTHESIS   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_MINUS   &kp SCROLLLOCK
-        &trans   &none   &kp LEFT_ARROW   &kp DOWN_ARROW   &kp RIGHT_ARROW   &kp PG_UP   &kp PERCENT   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_PLUS   &none
-        &trans   &kp K_APP   &none   &kp F11   &kp F12   &kp PG_DN   &trans   &trans   &to 0   &trans   &trans   &trans   &kp COMMA   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_ENTER   &trans
-        &magic LAYER_Magic 0   &kp CAPS   &kp INS   &kp F11   &kp F12      &trans   &trans   &trans   &trans   &trans   &trans      &kp KP_N0   &kp KP_N0   &kp KP_DOT   &kp KP_ENTER   &trans
+        &trans   &trans   &trans   &trans   &trans         &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &kp INT_YEN   &kp KP_NUM   &kp KP_EQUAL   &kp INT_YEN   &kp DE_EURO   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_DEGREE   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_PLUS   &trans
+        &trans   &kp DE_A_UMLAUT   &kp DE_ESZETT   &kp DE_O_UMLAUT   &kp DE_U_UMLAUT   &trans   &kp DE_PERCENT   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &to 0   &trans   &trans   &trans   &kp DE_COMMA   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY   &trans
+        &trans   &trans   &kp PG_UP   &kp PG_DN   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &kp BSPC   &kp KP_N0   &kp DE_DOT   &kp KP_SLASH   &trans
+        >;
+        };
+        
+        LAYER_Shlower {
+        bindings = <
+        &trans   &trans   &trans   &trans   &trans         &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &kp F10   &kp F11   &kp F12   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &kp F7   &kp F8   &kp F9   &trans   &trans
+        &trans   &kp LS(DE_A_UMLAUT)   &kp DE_CAPITAL_ESZETT   &kp LS(DE_O_UMLAUT)   &kp LS(DE_U_UMLAUT)   &trans   &trans   &kp F4   &kp F5   &kp F6   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &kp F1   &kp F2   &kp F3   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans
+        >;
+        };
+        
+        LAYER_Macro {
+        bindings = <
+        &none   &none   &none   &none   &none         &none   &none   &none   &none   &none
+        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
+        &none   &none   &none   &none   &rptu_mail   &none   &none   &none   &none   &none   &none   &none
+        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
+        &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
+        &none   &none   &none   &none   &none      &none   &none   &none   &none   &none   &none      &none   &none   &none   &none   &none
         >;
         };
         
         LAYER_Magic {
         bindings = <
-        &bt BT_CLR   &none   &none   &none   &none         &none   &none   &none   &none   &bt BT_CLR_ALL
+        &bt BT_CLR   &none   &kp CAPSLOCK   &kp KP_NUMLOCK   &kp SCROLLLOCK         &none   &none   &none   &none   &bt BT_CLR_ALL
         &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
         &none   &rgb_ug RGB_SPI   &rgb_ug RGB_SAI   &rgb_ug RGB_HUI   &rgb_ug RGB_BRI   &rgb_ug RGB_TOG   &none   &none   &none   &none   &none   &none
         &bootloader   &rgb_ug RGB_SPD   &rgb_ug RGB_SAD   &rgb_ug RGB_HUD   &rgb_ug RGB_BRD   &rgb_ug RGB_EFF   &none   &none   &none   &none   &none   &bootloader
