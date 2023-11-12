@@ -123,7 +123,7 @@
 };
 
 &sl {
-    release-after-ms = <50000>;
+    release-after-ms = <30000>;
 };
 #+END_SRC
 
@@ -155,7 +155,7 @@
 |             | &kp F6      | &kp DOWN     | &kp UP               | &kp LC(V)               | &kp DE_PLUS        |
 
 #+NAME: base-rt
-| &kp LG(N4) | &mt LALT HOME | &kp SPACE     |
+| &kp F14 | &mt LALT HOME | &kp SPACE     |
 | &kp LGUI   | &kp DEL       | &mt LCTRL ESC |
 
 ** layer shift
