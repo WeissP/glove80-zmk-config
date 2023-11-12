@@ -35,6 +35,60 @@
 
 / {
     macros {
+        rptu_mail: rptu_mail {
+            label = "RPTU_MAIL";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
+        rptu_cs_mail: rptu_cs_mail {
+            label = "rptu_cs_mail";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
+        gmail: gmail {
+            label = "gmail";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
+        wangyi_mail: wangyi_mail {
+            label = "wangyi_mail";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
+        webde_mail: webde_mail {
+            label = "webde_mail";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
+        personal_tk: personal_tk {
+            label = "personal_tk";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp LC(DE_HASH)>
+                , <&macro_tap &kp F &kp A &kp K &kp E>;
+        };
+
         copy_all: copy_all {
             label = "COPY_ALL";
             compatible = "zmk,behavior-macro";
@@ -100,7 +154,7 @@
 };
 
 &sl {
-    release-after-ms = <50000>;
+    release-after-ms = <30000>;
 };
 
 / {
@@ -205,7 +259,7 @@
         &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &kp TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_EXCLAMATION
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
-        &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp LG(N4)   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp DE_STAR
+        &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp DE_STAR
         &kp LC(A)   &kp LC(C)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &magic LAYER_Magic 0   &kp LGUI   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &kp LC(V)   &kp DE_PLUS
         >;
         };

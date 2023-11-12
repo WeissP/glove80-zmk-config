@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ keymapName ? "glove80", pkgs ? import <nixpkgs> { } }:
 
 let
   firmware = import ../zmk { };
@@ -7,7 +7,7 @@ let
   withBoard = board:
     firmware.zmk.override {
       inherit board;
-      keymap = "${config}/glove80.c";
+      keymap = "${config}/${keymapName}.c";
       kconfig = "${config}/glove80.conf";
     };
 
