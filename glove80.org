@@ -183,25 +183,25 @@
 
 * keymap
 
-** layer base
-*** left hand
+*** layer base
+**** left hand
 
 #+NAME: base-lnt
-| &kp F5          | &kp DE_CARET      | &kp F15      | &kp F16      | &kp F11      |             |
-| &kp DE_HASH     | &kp DE_UNDERSCORE | &kp DE_COLON | &mt LALT TAB | &kp DE_SLASH | &kp DE_SEMI |
-| &kp LC(TAB)     | &kp Q             | &kp W        | &kp E        | &kp R        | &kp T       |
-| &kp LS(LC(TAB)) | &kp A             | &kp S        | &kp D        | &kp F        | &kp G       |
-| &copy_all       | &kp DE_Z          | &kp X        | &kp C        | &kp V        | &kp B       |
-| &kp LC(A)       | &kp LC(C)         | &kp LEFT     | &kp RIGHT    | &kp F17      |             |
+| &kp F5          | &kp DE_CARET      | &kp F15           | &kp F16       | &kp F11      |             |
+| &kp DE_HASH     | &kp DE_UNDERSCORE | &mt LALT DE_COLON | &mt LCTRL TAB | &kp DE_SLASH | &kp DE_SEMI |
+| &kp LC(TAB)     | &kp Q             | &kp W             | &kp E         | &kp R        | &kp T       |
+| &kp LS(LC(TAB)) | &kp A             | &kp S             | &kp D         | &kp F        | &kp G       |
+| &copy_all       | &kp DE_Z          | &kp X             | &kp C         | &kp V        | &kp B       |
+| &kp LC(A)       | &kp LC(C)         | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
 
 #+NAME: base-lt
 | &lt LAYER_Lower ENTER | &sl LAYER_Sticky | &kp LSHIFT           |
 | &lt LAYER_Shift END   | &kp BSPC        | &magic LAYER_Magic 0 |
 
-*** right hand
+**** right hand
 
 #+NAME: base-rnt
-|             | &kp LG(N1)  | &kp LG(N2)   | &kp LG(N3)           | &kp DE_LBRC             | &kp DE_LBKT        |
+|             | &kp LG(N1)  | &kp LG(N2)   | &kp DE_SINGLE_QUOTE | &kp DE_LBRC             | &kp DE_LBKT        |
 | &kp DE_AMPS | &kp DE_BSLH | &kp DE_MINUS | &kp DE_DOUBLE_QUOTES | &kp DE_LEFT_PARENTHESIS | &kp DE_LT          |
 | &kp DE_Y    | &kp U       | &kp I        | &kp O                | &kp P                   | &kp DE_EXCLAMATION |
 | &kp H       | &kp J       | &kp K        | &kp L                | &kp DE_EQUAL            | &kp DE_GRAVE       |
@@ -219,7 +219,7 @@
 
 #+NAME: shift-lnt
 | &trans | &kp DE_DLLR  | &trans        | &trans    | &trans    |           |
-| &trans | &trans       | &trans        | &trans    | &trans    | &trans    |
+| &trans | &trans       | &kp LS(TAB)   | &trans    | &trans    | &trans    |
 | &trans | &kp LS(Q)    | &kp LS(W)     | &kp LS(E) | &kp LS(R) | &kp LS(T) |
 | &trans | &kp LS(A)    | &kp LS(S)     | &kp LS(D) | &kp LS(F) | &kp LS(G) |
 | &trans | &kp LS(DE_Z) | &kp LS(X)     | &kp LS(C) | &kp LS(V) | &kp LS(B) |
@@ -248,7 +248,7 @@
 
 #+NAME: lower-lnt
 | &trans | &trans          | &trans        | &trans          | &trans          |        |
-| &trans | &trans          | &trans        | &trans          | &trans          | &trans |
+| &trans | &trans          | &kp LG(ESC)   | &trans          | &trans          | &trans |
 | &trans | &trans          | &trans        | &trans          | &trans          | &trans |
 | &trans | &kp DE_A_UMLAUT | &kp DE_ESZETT | &kp DE_O_UMLAUT | &kp DE_U_UMLAUT | &trans |
 | &trans | &trans          | &trans        | &trans          | &trans          | &trans |
@@ -316,8 +316,11 @@ Shift + Lower layer (accomplished by conditional layer)
 | &trans | &trans | &trans      | &trans        | &trans     | &trans |
 | &trans | &trans | &webde_mail | &trans        | &rptu_mail | &trans |
 | &trans | &trans | &trans      | &trans        | &trans     | &gmail |
-| &trans | &trans | &trans      | &rptu_cs_mail | &trans     | &trans |
+| &trans | &trans | &trans      | &rptu_cs_mail | &kp LG(N4) | &trans |
 | &trans | &trans | &trans      | &trans        | &trans     |        |
+
+
+
 
 #+NAME: sticky-lt
 | &trans | &trans | &trans |

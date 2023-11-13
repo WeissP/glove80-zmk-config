@@ -255,8 +255,8 @@
         compatible = "zmk,keymap";
         LAYER_Base {
         bindings = <
-        &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp LG(N3)   &kp DE_LBRC   &kp DE_LBKT
-        &kp DE_HASH   &kp DE_UNDERSCORE   &kp DE_COLON   &mt LALT TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
+        &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp DE_SINGLE_QUOTE   &kp DE_LBRC   &kp DE_LBKT
+        &kp DE_HASH   &kp DE_UNDERSCORE   &mt LALT DE_COLON   &mt LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_EXCLAMATION
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
         &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp DE_STAR
@@ -267,7 +267,7 @@
         LAYER_Shift {
         bindings = <
         &trans   &kp DE_DLLR   &trans   &trans   &trans         &trans   &trans   &trans   &kp DE_RBRC   &kp DE_RBKT
-        &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_PIPE   &trans   &kp DE_AT   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
+        &trans   &trans   &kp LS(TAB)   &trans   &trans   &trans   &kp DE_PIPE   &trans   &kp DE_AT   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
         &trans   &kp LS(Q)   &kp LS(W)   &kp LS(E)   &kp LS(R)   &kp LS(T)   &kp LS(DE_Y)   &kp LS(U)   &kp LS(I)   &kp LS(O)   &kp LS(P)   &kp DE_QMARK
         &trans   &kp LS(A)   &kp LS(S)   &kp LS(D)   &kp LS(F)   &kp LS(G)   &kp LS(H)   &kp LS(J)   &kp LS(K)   &kp LS(L)   &kp SEMI   &kp DE_TILDE
         &trans   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &trans   &trans   &trans   &trans   &trans   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
@@ -278,7 +278,7 @@
         LAYER_Lower {
         bindings = <
         &trans   &trans   &trans   &trans   &trans         &trans   &trans   &trans   &trans   &trans
-        &trans   &trans   &trans   &trans   &trans   &trans   &kp INT_YEN   &kp KP_NUM   &kp KP_EQUAL   &kp INT_YEN   &kp DE_EURO   &trans
+        &trans   &trans   &kp LG(ESC)   &trans   &trans   &trans   &kp INT_YEN   &kp KP_NUM   &kp KP_EQUAL   &kp INT_YEN   &kp DE_EURO   &trans
         &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_DEGREE   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_PLUS   &trans
         &trans   &kp DE_A_UMLAUT   &kp DE_ESZETT   &kp DE_O_UMLAUT   &kp DE_U_UMLAUT   &trans   &kp DE_PERCENT   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS   &trans
         &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &to 0   &trans   &trans   &trans   &kp DE_COMMA   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY   &trans
@@ -303,7 +303,7 @@
         &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
         &trans   &trans   &webde_mail   &trans   &rptu_mail   &trans   &trans   &trans   &trans   &trans   &personal_tk   &trans
         &trans   &trans   &trans   &trans   &trans   &gmail   &trans   &trans   &trans   &trans   &trans   &trans
-        &trans   &trans   &trans   &rptu_cs_mail   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &wangyi_mail   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &rptu_cs_mail   &kp LG(N4)   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &wangyi_mail   &trans   &trans   &trans   &trans
         &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans
         >;
         };
