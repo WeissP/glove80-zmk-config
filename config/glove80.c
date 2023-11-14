@@ -256,7 +256,7 @@
         LAYER_Base {
         bindings = <
         &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp DE_SINGLE_QUOTE   &kp DE_LBRC   &kp DE_LBKT
-        &kp N0   &kp DE_UNDERSCORE   &mt LALT DE_COLON   &mt LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
+        &kp DE_UNDERSCORE   &kp N0   &mt LALT DE_COLON   &mt LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_QMARK
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
         &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp N1

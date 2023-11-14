@@ -187,12 +187,12 @@
 *** left hand
 
 #+NAME: base-lnt
-| &kp F5          | &kp DE_CARET      | &kp F15           | &kp F16       | &kp F11      |             |
-| &kp N0          | &kp DE_UNDERSCORE | &mt LALT DE_COLON | &mt LCTRL TAB | &kp DE_SLASH | &kp DE_SEMI |
-| &kp LC(TAB)     | &kp Q             | &kp W             | &kp E         | &kp R        | &kp T       |
-| &kp LS(LC(TAB)) | &kp A             | &kp S             | &kp D         | &kp F        | &kp G       |
-| &copy_all       | &kp DE_Z          | &kp X             | &kp C         | &kp V        | &kp B       |
-| &kp LC(A)       | &kp LC(V)         | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
+| &kp F5            | &kp DE_CARET | &kp F15           | &kp F16       | &kp F11      |             |
+| &kp DE_UNDERSCORE | &kp N0       | &mt LALT DE_COLON | &mt LCTRL TAB | &kp DE_SLASH | &kp DE_SEMI |
+| &kp LC(TAB)       | &kp Q        | &kp W             | &kp E         | &kp R        | &kp T       |
+| &kp LS(LC(TAB))   | &kp A        | &kp S             | &kp D         | &kp F        | &kp G       |
+| &copy_all         | &kp DE_Z     | &kp X             | &kp C         | &kp V        | &kp B       |
+| &kp LC(A)         | &kp LC(V)    | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
 
 #+NAME: base-lt
 | &lt LAYER_Lower ENTER | &sl LAYER_Sticky | &kp LSHIFT           |
