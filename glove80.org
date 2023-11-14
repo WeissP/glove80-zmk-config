@@ -183,8 +183,8 @@
 
 * keymap
 
-*** layer base
-**** left hand
+** layer base
+*** left hand
 
 #+NAME: base-lnt
 | &kp F5          | &kp DE_CARET      | &kp F15           | &kp F16       | &kp F11      |             |
@@ -192,21 +192,21 @@
 | &kp LC(TAB)     | &kp Q             | &kp W             | &kp E         | &kp R        | &kp T       |
 | &kp LS(LC(TAB)) | &kp A             | &kp S             | &kp D         | &kp F        | &kp G       |
 | &copy_all       | &kp DE_Z          | &kp X             | &kp C         | &kp V        | &kp B       |
-| &kp LC(A)       | &kp LC(C)         | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
+| &kp LC(A)       | &kp LC(V)         | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
 
 #+NAME: base-lt
 | &lt LAYER_Lower ENTER | &sl LAYER_Sticky | &kp LSHIFT           |
 | &lt LAYER_Shift END   | &kp BSPC        | &magic LAYER_Magic 0 |
 
-**** right hand
+*** right hand
 
 #+NAME: base-rnt
-|             | &kp LG(N1)  | &kp LG(N2)   | &kp DE_SINGLE_QUOTE | &kp DE_LBRC             | &kp DE_LBKT        |
-| &kp DE_AMPS | &kp DE_BSLH | &kp DE_MINUS | &kp DE_DOUBLE_QUOTES | &kp DE_LEFT_PARENTHESIS | &kp DE_LT          |
-| &kp DE_Y    | &kp U       | &kp I        | &kp O                | &kp P                   | &kp DE_EXCLAMATION |
-| &kp H       | &kp J       | &kp K        | &kp L                | &kp DE_EQUAL            | &kp DE_GRAVE       |
-| &kp N       | &kp M       | &kp COMMA    | &kp DOT              | &kp LC(LS(DE_PLUS))     | &kp DE_STAR        |
-|             | &kp F6      | &kp DOWN     | &kp UP               | &kp LC(V)               | &kp DE_PLUS        |
+|             | &kp LG(N1)  | &kp LG(N2)   | &kp DE_SINGLE_QUOTE  | &kp DE_LBRC             | &kp DE_LBKT  |
+| &kp DE_AMPS | &kp DE_BSLH | &kp DE_MINUS | &kp DE_DOUBLE_QUOTES | &kp DE_LEFT_PARENTHESIS | &kp DE_LT    |
+| &kp DE_Y    | &kp U       | &kp I        | &kp O                | &kp P                   | &kp DE_QMARK |
+| &kp H       | &kp J       | &kp K        | &kp L                | &kp DE_EQUAL            | &kp DE_GRAVE |
+| &kp N       | &kp M       | &kp COMMA    | &kp DOT              | &kp LC(LS(DE_PLUS))     | &kp DE_STAR  |
+|             | &kp F6      | &kp DOWN     | &kp UP               | &kp LC(C)               | &kp DE_PLUS  |
 
 #+NAME: base-rt
 | &kp F14 | &mt LALT HOME | &kp SPACE     |
@@ -232,12 +232,12 @@
 *** right hand
 
 #+NAME: shift-rnt
-|              | &trans     | &trans       | &trans              | &kp DE_RBRC              | &kp DE_RBKT  |
-| &kp DE_PIPE  | &trans     | &kp DE_AT    | &kp DE_SINGLE_QUOTE | &kp DE_RIGHT_PARENTHESIS | &kp DE_GT    |
-| &kp LS(DE_Y) | &kp LS(U)  | &kp LS(I)    | &kp LS(O)           | &kp LS(P)                | &kp DE_QMARK |
-| &kp LS(H)    | &kp LS(J)  | &kp LS(K)    | &kp LS(L)           | &kp SEMI                 | &kp DE_TILDE |
-| &kp LS(N)    | &kp LS(M)  | &kp COMMA    | &kp DOT             | &kp FSLH                 | &kp PG_UP    |
-|              | &kp LG(UP) | &kp LG(DOWN) | &kp LBKT            | &kp RBKT                 | &kp PG_DN    |
+|              | &trans     | &trans       | &trans              | &kp DE_RBRC              | &kp DE_RBKT        |
+| &kp DE_PIPE  | &trans     | &kp DE_AT    | &kp DE_SINGLE_QUOTE | &kp DE_RIGHT_PARENTHESIS | &kp DE_GT          |
+| &kp LS(DE_Y) | &kp LS(U)  | &kp LS(I)    | &kp LS(O)           | &kp LS(P)                | &kp DE_EXCLAMATION |
+| &kp LS(H)    | &kp LS(J)  | &kp LS(K)    | &kp LS(L)           | &kp SEMI                 | &kp DE_TILDE       |
+| &kp LS(N)    | &kp LS(M)  | &kp COMMA    | &kp DOT             | &kp FSLH                 | &kp PG_UP          |
+|              | &kp LG(UP) | &kp LG(DOWN) | &kp LBKT            | &kp RBKT                 | &kp PG_DN          |
 
 #+NAME: shift-rt
 | &trans | &trans | &trans |
