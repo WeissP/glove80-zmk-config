@@ -30,6 +30,16 @@
             tapping-term-ms = <200>;
             bindings = <&mo LAYER_Lower>, <&to LAYER_Lower>;
         };
+        rpi: require_prior_idle {
+            compatible = "zmk,behavior-hold-tap";
+            label = "REQUIRE_PRIOR_IDLE";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
     };
 };
 
@@ -97,6 +107,30 @@
                 = <&macro_tap &kp LC(A) &kp LC(C)>;
         };
 
+        right_single_arrow: right_single_arrow {
+            label = "RIGHT_SINGLE_ARROW";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp SPACE &kp DE_MINUS &kp DE_GT &kp SPACE>;
+        };
+
+        left_single_arrow: left_single_arrow {
+            label = "LEFT_SINGLE_ARROW";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp SPACE &kp DE_LT &kp DE_MINUS &kp SPACE>;
+        };
+
+        right_double_arrow: right_double_arrow {
+            label = "RIGHT_DOUBLE_ARROW";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp SPACE &kp DE_EQUAL &kp DE_GT &kp SPACE>;
+        };
+
         rgb_ug_status_macro: rgb_ug_status_macro {
             label = "RGB_UG_STATUS";
             compatible = "zmk,behavior-macro";
@@ -155,6 +189,10 @@
 
 &sl {
     release-after-ms = <5000>;
+};
+
+&lt {
+    tapping-term-ms = <300>;
 };
 
 / {
@@ -259,8 +297,8 @@
         &kp DE_UNDERSCORE   &kp N0   &mt LALT DE_COLON   &mt LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_QMARK
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
-        &copy_all   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &kp LSHIFT   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp N1
-        &kp LC(A)   &kp LC(V)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &magic LAYER_Magic 0   &kp LGUI   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &kp LC(C)   &kp N2
+        &kp LCTRL   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &magic LAYER_Magic 0   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp N1
+        &kp LC(C)   &kp LC(V)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &kp LSHIFT   &mt LGUI K_PLAY_PAUSE   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &copy_all   &kp N2
         >;
         };
         
@@ -270,19 +308,19 @@
         &trans   &trans   &kp LS(TAB)   &trans   &trans   &trans   &kp DE_PIPE   &kp DE_HASH   &kp DE_AT   &kp DE_SINGLE_QUOTE   &kp DE_RIGHT_PARENTHESIS   &kp DE_GT
         &trans   &kp LS(Q)   &kp LS(W)   &kp LS(E)   &kp LS(R)   &kp LS(T)   &kp LS(DE_Y)   &kp LS(U)   &kp LS(I)   &kp LS(O)   &kp LS(P)   &kp DE_EXCLAMATION
         &trans   &kp LS(A)   &kp LS(S)   &kp LS(D)   &kp LS(F)   &kp LS(G)   &kp LS(H)   &kp LS(J)   &kp LS(K)   &kp LS(L)   &kp SEMI   &kp DE_TILDE
-        &trans   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &trans   &trans   &trans   &trans   &trans   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &kp PG_UP
-        &trans   &kp LG(LEFT)   &kp LG(RIGHT)   &kp LEFT   &kp RIGHT      &trans   &trans   &trans   &trans   &trans   &trans      &kp LG(UP)   &kp LG(DOWN)   &kp LBKT   &kp RBKT   &kp PG_DN
+        &trans   &kp LS(DE_Z)   &kp LS(X)   &kp LS(C)   &kp LS(V)   &kp LS(B)   &trans   &trans   &trans   &trans   &trans   &trans   &kp LS(N)   &kp LS(M)   &kp COMMA   &kp DOT   &kp FSLH   &trans
+        &trans   &trans   &kp LS(LEFT)   &kp LS(RIGHT)   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &kp LS(DOWN)   &kp LS(UP)   &trans   &trans
         >;
         };
         
         LAYER_Lower {
         bindings = <
         &trans   &trans   &trans   &trans   &trans         &trans   &trans   &trans   &trans   &trans
-        &trans   &trans   &kp LG(ESC)   &trans   &trans   &trans   &kp DE_COLON   &kp KP_NUM   &kp KP_EQUAL   &kp INT_YEN   &kp DE_EURO   &trans
-        &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_DEGREE   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_PLUS   &trans
-        &trans   &kp DE_A_UMLAUT   &kp DE_ESZETT   &kp DE_O_UMLAUT   &kp DE_U_UMLAUT   &trans   &kp DE_PERCENT   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_MINUS   &trans
-        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &to 0   &trans   &trans   &trans   &kp DE_COMMA   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY   &trans
-        &trans   &trans   &kp PG_UP   &kp PG_DN   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &kp BSPC   &kp KP_N0   &kp DE_DOT   &kp KP_SLASH   &trans
+        &trans   &trans   &kp LG(ESC)   &trans   &trans   &trans   &kp DE_COLON   &kp &trans   &kp DE_EQUAL   &kp INT_YEN   &kp DE_EURO   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &kp DE_DEGREE   &kp N7   &kp N8   &kp N9   &kp DE_PLUS   &trans
+        &trans   &kp DE_A_UMLAUT   &kp DE_ESZETT   &kp DE_O_UMLAUT   &kp DE_U_UMLAUT   &trans   &kp DE_PERCENT   &kp N4   &kp N5   &kp N6   &kp DE_MINUS   &trans
+        &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &to 0   &trans   &trans   &trans   &kp DE_COMMA   &kp N1   &kp N2   &kp N3   &kp DE_ASTERISK   &trans
+        &trans   &trans   &kp PG_UP   &kp PG_DN   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &kp BSPC   &kp N0   &kp DE_DOT   &kp DE_SLASH   &trans
         >;
         };
         
@@ -303,8 +341,8 @@
         &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
         &trans   &trans   &webde_mail   &trans   &rptu_mail   &trans   &trans   &trans   &trans   &trans   &personal_tk   &trans
         &trans   &trans   &trans   &trans   &trans   &gmail   &trans   &trans   &trans   &trans   &trans   &trans
-        &trans   &trans   &trans   &rptu_cs_mail   &kp LG(N4)   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &wangyi_mail   &trans   &trans   &trans   &trans
-        &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans
+        &trans   &trans   &trans   &rptu_cs_mail   &kp LG(N4)   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &wangyi_mail   &left_single_arrow   &right_single_arrow   &trans   &trans
+        &trans   &trans   &trans   &trans   &trans      &trans   &trans   &trans   &trans   &trans   &trans      &trans   &trans   &right_double_arrow   &trans   &trans
         >;
         };
         
@@ -314,8 +352,8 @@
         &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
         &none   &rgb_ug RGB_SPI   &rgb_ug RGB_SAI   &rgb_ug RGB_HUI   &rgb_ug RGB_BRI   &rgb_ug RGB_TOG   &none   &none   &none   &none   &none   &none
         &bootloader   &rgb_ug RGB_SPD   &rgb_ug RGB_SAD   &rgb_ug RGB_HUD   &rgb_ug RGB_BRD   &rgb_ug RGB_EFF   &none   &none   &none   &none   &none   &bootloader
-        &sys_reset   &none   &none   &none   &none   &none   &bt_2   &bt_3   &out OUT_USB   &none   &none   &none   &none   &none   &none   &none   &none   &sys_reset
-        &none   &none   &none   &none   &none      &bt_0   &bt_1   &none   &none   &none   &none      &none   &none   &none   &none   &none
+        &sys_reset   &none   &none   &none   &none   &none   &bt_2   &bt_3   &none   &none   &none   &none   &none   &none   &none   &none   &none   &sys_reset
+        &none   &none   &none   &none   &none      &bt_0   &bt_1   &out OUT_USB   &none   &none   &none      &none   &none   &none   &none   &none
         >;
         };
         
@@ -326,9 +364,14 @@
     combos {
         compatible = "zmk,combos";
         combo_ctrlg {
-            timeout-ms = <50>;
-            key-positions = <POS_RH_C2R4 POS_RH_C3R4>;
+            timeout-ms = <80>;
+            key-positions = <POS_RH_C3R5 POS_RH_C4R5>;
             bindings = <&kp LC(G)>;
+        };
+        combo_num {
+            timeout-ms = <80>;
+            key-positions = <POS_RH_C5R1 POS_RH_C6R1>;
+            bindings = <&tog LAYER_Lower>;
         };
     };
 };
