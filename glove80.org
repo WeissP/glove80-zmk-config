@@ -13,13 +13,22 @@
 * layer defines
 
 #+begin_src elisp :results none
-(setq km/active-layers '("base" "shift" "lower" "shlower" "sticky" "magic"))
+(setq km/active-layers '("base" "us" "shift" "lower" "shlower" "sticky" "magic"))
 #+end_src
 
 #+NAME: layer-defines
 #+BEGIN_SRC elisp
 (km/gen-layer-defines km/active-layers)
 #+END_SRC
+
+#+RESULTS: layer-defines
+: #define LAYER_Base 0
+: #define LAYER_Us 1
+: #define LAYER_Shift 2
+: #define LAYER_Lower 3
+: #define LAYER_Shlower 4
+: #define LAYER_Sticky 5
+: #define LAYER_Magic 6
 
 #+BEGIN_SRC c :noweb yes :tangle config/glove80.c
 <<layer-defines()>>
@@ -63,6 +72,15 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
             bindings = <&kp>, <&kp>;
+        };
+        lt_hp: hold_preferred_lt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_PREFERRED_LT";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
     };
 };
@@ -222,28 +240,24 @@
 &sl {
     release-after-ms = <5000>;
 };
-
-&lt {
-    tapping-term-ms = <300>;
-};
 #+END_SRC
 
 * keymap
 
 ** layer base
-*** left hand
 
+*** left hand
 #+NAME: base-lnt
-| &kp F5            | &kp DE_CARET | &kp F15           | &kp F16       | &kp F11      |             |
-| &kp DE_UNDERSCORE | &kp N0       | &mt LALT DE_COLON | &mt LCTRL TAB | &kp DE_SLASH | &kp DE_SEMI |
-| &kp LC(TAB)       | &kp Q        | &kp W             | &kp E         | &kp R        | &kp T       |
-| &kp LS(LC(TAB))   | &kp A        | &kp S             | &kp D         | &kp F        | &kp G       |
-| &kp LCTRL         | &kp DE_Z     | &kp X             | &kp C         | &kp V        | &kp B       |
-| &kp LC(C)         | &kp LC(V)    | &kp LEFT          | &kp RIGHT     | &kp F17      |             |
+| &kp F5            | &kp DE_CARET | &kp F15            | &kp F16        | &kp F11      |             |
+| &kp DE_UNDERSCORE | &kp N0       | &rpi LALT DE_COLON | &rpi LCTRL TAB | &kp DE_SLASH | &kp DE_SEMI |
+| &kp LC(TAB)       | &kp Q        | &kp W              | &kp E          | &kp R        | &kp T       |
+| &kp LS(LC(TAB))   | &kp A        | &kp S              | &kp D          | &kp F        | &kp G       |
+| &kp LCTRL         | &kp DE_Z     | &kp X              | &kp C          | &kp V        | &kp B       |
+| &kp LC(C)         | &kp LC(V)    | &kp LEFT           | &kp RIGHT      | &kp F17      |             |
 
 #+NAME: base-lt
-| &lt LAYER_Lower ENTER | &sl LAYER_Sticky | &magic LAYER_Magic 0 |
-| &lt LAYER_Shift END   | &kp BSPC         | &kp LSHIFT           |
+| &lt_hp LAYER_Lower ENTER | &sl LAYER_Sticky | &magic LAYER_Magic 0 |
+| &lt_hp LAYER_Shift END   | &kp BSPC         | &kp LSHIFT           |
 
 *** right hand
 
@@ -257,10 +271,39 @@
 
 #+NAME: base-rt
 | &kp F14               | &mt LALT HOME | &kp SPACE     |
-| &mt LGUI K_PLAY_PAUSE | &kp DEL       | &mt LCTRL ESC |
+| &ht LGUI K_PLAY_PAUSE | &kp DEL       | &rpi LCTRL ESC |
+
+** layer base us layout
+
+*** left hand
+
+#+NAME: us-lnt
+| &kp F5          | &kp CARET | &tog LAYER_Us   | &kp F16        | &kp F11   |          |
+| &kp UNDERSCORE  | &kp N0    | &rpi LALT COLON | &rpi LCTRL TAB | &kp SLASH | &kp SEMI |
+| &kp LC(TAB)     | &kp Q     | &kp W           | &kp E          | &kp R     | &kp T    |
+| &kp LS(LC(TAB)) | &kp A     | &kp S           | &kp D          | &kp F     | &kp G    |
+| &kp LCTRL       | &kp Z     | &kp X           | &kp C          | &kp V     | &kp B    |
+| &kp LC(C)       | &kp LC(V) | &kp LEFT        | &kp RIGHT      | &kp F17   |          |
+
+#+NAME: us-lt
+| &lt_hp LAYER_Lower ENTER | &sl LAYER_Sticky | &trans     |
+| &lt_hp LAYER_Shift END   | &kp BSPC         | &kp LSHIFT |
+
+*** right hand
+
+#+NAME: us-rnt
+|          | &kp LG(N1) | &kp LG(N2) | &kp SINGLE_QUOTE  | &kp LBRC             | &kp LBKT  |
+| &kp AMPS | &kp BSLH   | &kp MINUS  | &kp DOUBLE_QUOTES | &kp LEFT_PARENTHESIS | &kp LT    |
+| &kp Y    | &kp U      | &kp I      | &kp O             | &kp P                | &kp QMARK |
+| &kp H    | &kp J      | &kp K      | &kp L             | &kp EQUAL            | &kp GRAVE |
+| &kp N    | &kp M      | &kp COMMA  | &kp DOT           | &kp LC(LS(PLUS))     | &kp N1    |
+|          | &kp F6     | &kp DOWN   | &kp UP            | &copy_all            | &kp N2    |
+
+#+NAME: us-rt
+| &kp F14               | &mt LALT HOME | &kp SPACE     |
+| &ht LGUI K_PLAY_PAUSE | &kp DEL       | &rpi LCTRL ESC |
 
 ** layer shift
-
 
 *** left hand
 
@@ -407,12 +450,12 @@ Shift + Lower layer (accomplished by conditional layer)
 *** right hand
 
 #+NAME: magic-rnt
-|       | &none | &none | &none | &none | &bt BT_CLR_ALL |
-| &none | &none | &none | &none | &none | &none          |
-| &none | &none | &none | &none | &none | &none          |
-| &none | &none | &none | &none | &none | &bootloader    |
-| &none | &none | &none | &none | &none | &sys_reset     |
-|       | &none | &none | &none | &none | &none          |
+|       | &none         | &none | &none | &none | &bt BT_CLR_ALL |
+| &none | &none         | &none | &none | &none | &none          |
+| &none | &tog LAYER_Us | &none | &none | &none | &none          |
+| &none | &none         | &none | &none | &none | &bootloader    |
+| &none | &none         | &none | &none | &none | &sys_reset     |
+|       | &none         | &none | &none | &none | &none          |
 
 #+NAME: magic-rt
 | &none    | &none     | &none     |
@@ -555,6 +598,15 @@ This part is to generate keymap according to the org tables defined above and so
 #+ATTR_ORG: :width 700
 #+ATTR_LATEX: :width 12cm
 [[file:../../Documents/Org-roam/Bilder/2024-08-05_17-49-36.png]]
+
+* Bluetooth
+
+|---------+---------|
+| End 0   | iPhone  |
+| Bksp 1  | iPad    |
+| Enter 2 | Desktop |
+| Layer 3 | MacBook |
+|---------+---------|
 
 * code generator
 

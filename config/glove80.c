@@ -7,11 +7,12 @@
 #include "./locale/keys_de.h"
 
 #define LAYER_Base 0
-#define LAYER_Shift 1
-#define LAYER_Lower 2
-#define LAYER_Shlower 3
-#define LAYER_Sticky 4
-#define LAYER_Magic 5
+#define LAYER_Us 1
+#define LAYER_Shift 2
+#define LAYER_Lower 3
+#define LAYER_Shlower 4
+#define LAYER_Sticky 5
+#define LAYER_Magic 6
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -35,10 +36,28 @@
             label = "REQUIRE_PRIOR_IDLE";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             quick-tap-ms = <200>;
             require-prior-idle-ms = <125>;
             bindings = <&kp>, <&kp>;
+        };
+        ht: hold_preferred_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_PREFERRED_TAP";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+        lt_hp: hold_preferred_lt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOLD_PREFERRED_LT";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
     };
 };
@@ -191,10 +210,6 @@
     release-after-ms = <5000>;
 };
 
-&lt {
-    tapping-term-ms = <300>;
-};
-
 / {
     magic: magic {
         compatible = "zmk,behavior-hold-tap";
@@ -294,11 +309,22 @@
         LAYER_Base {
         bindings = <
         &kp F5   &kp DE_CARET   &kp F15   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp DE_SINGLE_QUOTE   &kp DE_LBRC   &kp DE_LBKT
-        &kp DE_UNDERSCORE   &kp N0   &mt LALT DE_COLON   &mt LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
+        &kp DE_UNDERSCORE   &kp N0   &rpi LALT DE_COLON   &rpi LCTRL TAB   &kp DE_SLASH   &kp DE_SEMI   &kp DE_AMPS   &kp DE_BSLH   &kp DE_MINUS   &kp DE_DOUBLE_QUOTES   &kp DE_LEFT_PARENTHESIS   &kp DE_LT
         &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp DE_Y   &kp U   &kp I   &kp O   &kp P   &kp DE_QMARK
         &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp DE_EQUAL   &kp DE_GRAVE
-        &kp LCTRL   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt LAYER_Lower ENTER   &sl LAYER_Sticky   &magic LAYER_Magic 0   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp N1
-        &kp LC(C)   &kp LC(V)   &kp LEFT   &kp RIGHT   &kp F17      &lt LAYER_Shift END   &kp BSPC   &kp LSHIFT   &mt LGUI K_PLAY_PAUSE   &kp DEL   &mt LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &copy_all   &kp N2
+        &kp LCTRL   &kp DE_Z   &kp X   &kp C   &kp V   &kp B   &lt_hp LAYER_Lower ENTER   &sl LAYER_Sticky   &magic LAYER_Magic 0   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(DE_PLUS))   &kp N1
+        &kp LC(C)   &kp LC(V)   &kp LEFT   &kp RIGHT   &kp F17      &lt_hp LAYER_Shift END   &kp BSPC   &kp LSHIFT   &ht LGUI K_PLAY_PAUSE   &kp DEL   &rpi LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &copy_all   &kp N2
+        >;
+        };
+        
+        LAYER_Us {
+        bindings = <
+        &kp F5   &kp CARET   &tog LAYER_Us   &kp F16   &kp F11         &kp LG(N1)   &kp LG(N2)   &kp SINGLE_QUOTE   &kp LBRC   &kp LBKT
+        &kp UNDERSCORE   &kp N0   &rpi LALT COLON   &rpi LCTRL TAB   &kp SLASH   &kp SEMI   &kp AMPS   &kp BSLH   &kp MINUS   &kp DOUBLE_QUOTES   &kp LEFT_PARENTHESIS   &kp LT
+        &kp LC(TAB)   &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P   &kp QMARK
+        &kp LS(LC(TAB))   &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp EQUAL   &kp GRAVE
+        &kp LCTRL   &kp Z   &kp X   &kp C   &kp V   &kp B   &lt_hp LAYER_Lower ENTER   &sl LAYER_Sticky   &trans   &kp F14   &mt LALT HOME   &kp SPACE   &kp N   &kp M   &kp COMMA   &kp DOT   &kp LC(LS(PLUS))   &kp N1
+        &kp LC(C)   &kp LC(V)   &kp LEFT   &kp RIGHT   &kp F17      &lt_hp LAYER_Shift END   &kp BSPC   &kp LSHIFT   &ht LGUI K_PLAY_PAUSE   &kp DEL   &rpi LCTRL ESC      &kp F6   &kp DOWN   &kp UP   &copy_all   &kp N2
         >;
         };
         
@@ -350,7 +376,7 @@
         bindings = <
         &bt BT_CLR   &none   &kp CAPSLOCK   &kp KP_NUMLOCK   &kp SCROLLLOCK         &none   &none   &none   &none   &bt BT_CLR_ALL
         &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none
-        &none   &rgb_ug RGB_SPI   &rgb_ug RGB_SAI   &rgb_ug RGB_HUI   &rgb_ug RGB_BRI   &rgb_ug RGB_TOG   &none   &none   &none   &none   &none   &none
+        &none   &rgb_ug RGB_SPI   &rgb_ug RGB_SAI   &rgb_ug RGB_HUI   &rgb_ug RGB_BRI   &rgb_ug RGB_TOG   &none   &tog LAYER_Us   &none   &none   &none   &none
         &bootloader   &rgb_ug RGB_SPD   &rgb_ug RGB_SAD   &rgb_ug RGB_HUD   &rgb_ug RGB_BRD   &rgb_ug RGB_EFF   &none   &none   &none   &none   &none   &bootloader
         &sys_reset   &none   &none   &none   &none   &none   &bt_2   &bt_3   &none   &none   &none   &none   &none   &none   &none   &none   &none   &sys_reset
         &none   &none   &none   &none   &none      &bt_0   &bt_1   &out OUT_USB   &none   &none   &none      &none   &none   &none   &none   &none
