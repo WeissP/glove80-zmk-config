@@ -68,54 +68,42 @@
             label = "RPTU_MAIL";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         rptu_cs_mail: rptu_cs_mail {
             label = "rptu_cs_mail";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         gmail: gmail {
             label = "gmail";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         wangyi_mail: wangyi_mail {
             label = "wangyi_mail";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         webde_mail: webde_mail {
             label = "webde_mail";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         personal_tk: personal_tk {
             label = "personal_tk";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp LC(DE_HASH)>
-                , <&macro_tap &kp F &kp A &kp K &kp E>;
+            bindings = <&macro_tap &kp F &kp A &kp K &kp E>;
         };
 
         copy_all: copy_all {
